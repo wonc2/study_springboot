@@ -25,9 +25,10 @@ public class AuthsService {
     public Object insert(Map<String, Object> dataMap) {
         List<String> authList = new ArrayList<>();
         if (!"ROLE_MEMBER".equals((String) dataMap.get("auth"))){
-            authList.add("ROLE_MEMBER");  // default auth
+            authList.add("ROLE_MEMBER01");  // default auth
         }
         authList.add((String) dataMap.get("auth"));  // choosed auth
+        authList.add("ROLE_MEMBER01");  // default auth
         dataMap.put("authList", authList);
 
         String sqlMapId = "Auths.insert";

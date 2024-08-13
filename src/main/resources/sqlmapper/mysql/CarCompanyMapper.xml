@@ -3,7 +3,7 @@
 <mapper namespace="CarCompany">
     <!-- 검색 -->
     <select id="getAllList" resultType="Map">
-        select CP_NAME as '회사이름', CAR_NAME as '자동차이름', DATE_YEAR as '연식', COUNT(`OPTION`) as '옵션 갯수'
+        select CP_NAME as '회사이름', CAR_NAME as '자동차이름', DATE_YEAR as '연식', COUNT(`OPTION`) as '옵션 갯수', CI.CI_PK
         from CAR_INFO CI
                  INNER JOIN CAR_INFO_OPTIONS COP ON CI.CI_PK = COP.CI_FK
                  INNER JOIN COMPANY CP ON CP.CP_PK = CI.CP_FK
@@ -35,4 +35,14 @@
         INNER JOIN OPTIONS OP ON OP.OP_PK = COP.OP_FK
         GROUP BY CP.CP_PK, CN.CN_PK, MY.YEAR_PK, CI.CI_PK;
     </select>
+
+    <!-- 삭제 -->
+    <delete id="deleteCarFk" parameterType="Map">
+        delete from CAR_INFO_OPTIONS
+        where CI_FK = #{CI_PK}
+    </delete>
+    <delete id="deleteCarPk" parameterType="Map">
+        delete from CAR_INFO
+        where CI_PK = #{CI_PK}
+    </delete>
 </mapper>
