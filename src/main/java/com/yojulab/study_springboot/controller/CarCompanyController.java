@@ -17,7 +17,7 @@ public class CarCompanyController {
     CarCompanyService carCompanyService;
 
     @GetMapping("/car_company")
-    public ModelAndView carCompany(@RequestParam Map params, ModelAndView modelAndView) {
+    public ModelAndView carCompany(ModelAndView modelAndView) {
         Object result = carCompanyService.carCompanyList();
         modelAndView.addObject("result", result);
 

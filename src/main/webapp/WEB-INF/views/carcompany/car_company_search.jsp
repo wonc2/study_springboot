@@ -29,7 +29,7 @@
                 </select>
                 <input type="text" name="words" value='<%= params.getOrDefault("words", "") %>'
                        class="form-control" placeholder="Search..." id="keydownEnter">
-                <button class="btn btn-primary" type="submit" formaction="/carInfor/map/selectSearch"
+                <button class="btn btn-primary" type="submit" formaction="/carcompany/car_company_search"
                         formmethod="get">Go</button>
             </div>
             <h2>Table</h2>
