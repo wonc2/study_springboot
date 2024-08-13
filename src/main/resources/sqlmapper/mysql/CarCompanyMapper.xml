@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CarCompany">
+    <!-- 검색 -->
+    <select id="getAllList" resultType="Map">
+        select CP_NAME as '회사이름', CAR_NAME as '자동차이름', DATE_YEAR as '연식', COUNT(`OPTION`) as '옵션 갯수'
+        from CAR_INFO CI
+                 INNER JOIN CAR_INFO_OPTIONS COP ON CI.CI_PK = COP.CI_FK
+                 INNER JOIN COMPANY CP ON CP.CP_PK = CI.CP_FK
+                 INNER JOIN CAR_NAME CN ON CN.CN_PK = CI.CN_FK
+                 INNER JOIN MODEL_YEAR MY ON MY.YEAR_PK = CI.YEAR_FK
+                 INNER JOIN OPTIONS OP ON OP.OP_PK = COP.OP_FK
+        GROUP BY CP.CP_PK, CN.CN_PK, MY.YEAR_PK, CI.CI_PK
+    </select>
+
+<!--    <select id="getSearchList" parameterType="Map" resultType="Map">-->
+<!--        select CP_NAME as '회사이름', CAR_NAME as '자동차이름', DATE_YEAR as '연식', COUNT(`OPTION`) as '옵션 갯수'-->
+<!--        from CAR_INFO CI-->
+<!--        <choose>-->
+<!--            <when test="search == 'YEAR'">-->
+<!--                INNER JOIN (select * from MODEL_YEAR where 1 = 1 AND DATE_YEAR = 2018) MY ON MY.YEAR_PK = CI.YEAR_FK-->
+<!--                INNER JOIN MODEL_YEAR MY ON MY.YEAR_PK = CI.YEAR_FK-->
+<!--            </when>-->
+<!--            <when test="search == 'CAR_NAME'">-->
+<!--                INNER JOIN (select * from CAR_NAME where 1 = 1 AND CAR_NAME like CONCAT('소나타', '%')) CN ON CN.CN_PK = CI.CN_FK-->
+<!--                INNER JOIN CAR_NAME CN ON CN.CN_PK = CI.CN_FK-->
+<!--            </when>-->
+<!--            <otherwise>-->
+<!--                INNER JOIN CAR_NAME CN ON CN.CN_PK = CI.CN_FK-->
+<!--                INNER JOIN MODEL_YEAR MY ON MY.YEAR_PK = CI.YEAR_FK-->
+<!--            </otherwise>-->
+<!--            INNER JOIN CAR_INFO_OPTIONS COP ON CI.CI_PK = COP.CI_FK-->
+<!--            INNER JOIN COMPANY CP ON CP.CP_PK = CI.CP_FK-->
+<!--            INNER JOIN OPTIONS OP ON OP.OP_PK = COP.OP_FK-->
+<!--            GROUP BY CP.CP_PK, CN.CN_PK, MY.YEAR_PK, CI.CI_PK;-->
+<!--        </choose>-->
+<!--    </select>-->
+</mapper>
