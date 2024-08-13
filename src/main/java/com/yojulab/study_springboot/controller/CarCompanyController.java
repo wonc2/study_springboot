@@ -36,11 +36,21 @@ public class CarCompanyController {
 
     // delete with MVC
     @PostMapping("/deleteAtList/{UNIQUE_ID}")
-    public ModelAndView deleteAndSelectSearch(@PathVariable String UNIQUE_ID
+    public ModelAndView delete(@PathVariable String UNIQUE_ID
             , @RequestParam Map params, ModelAndView modelAndView) {
         Object result = carCompanyService.deleteAtList(UNIQUE_ID, params);
         modelAndView.addObject("params", params);
         modelAndView.addObject("result", result);
+
+        modelAndView.setViewName("/WEB-INF/views/carcompany/car_company.jsp");
+        return modelAndView;
+    }
+
+    @GetMapping("/read/{UNIQUE_ID}")
+    public ModelAndView read(@PathVariable String UNIQUE_ID, @RequestParam Map params, ModelAndView modelAndView) {
+        Object result = carCompanyService.selectDetail(UNIQUE_ID, params);
+        modelAndView.addObject("result", result);
+        modelAndView.addObject("params", params);
 
         modelAndView.setViewName("/WEB-INF/views/carcompany/car_company.jsp");
         return modelAndView;

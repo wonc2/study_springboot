@@ -47,4 +47,12 @@ public class CarCompanyService {
 
         return result;
     }
+
+    public Object selectDetail(String CI_PK, Map dataMap) {
+        String sqlMapId = "CarCompany.selectDetail";
+        dataMap.put("CI_PK", CI_PK);
+
+        Object result = sharedDao.getOne(sqlMapId, dataMap);
+        return result;
+    }
 }
